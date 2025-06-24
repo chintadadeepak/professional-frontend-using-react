@@ -1,10 +1,87 @@
-import React from "react";
-import PasswordGenerator from "./projects/password-generator";
+import React, { useState } from "react";
+import { InputBox } from "./components/index";
+import useCurrencyInfo from "./hooks/useCurrencyInfo";
+// import PasswordGenerator from "./projects/password-generator";
 
 function App() {
+  const [fromAmount, setFromAmount] = useState("");
+  const [convertedAmount, setConvertedAmount] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("usd");
+  const [toCurrency, setToCurrency] = useState("inr");
+
+  const swapUnits = () => {
+    let temp = fromCurrency;
+    setFromCurrency(toCurrency);
+    setToCurrency(temp);
+    // temp = fromAmount;
+    // setFromAmount(convertedAmount);
+    // setConvertedAmount(temp);
+    console.log("function called..");
+  };
+
+  const data = useCurrencyInfo(fromCurrency);
+  const currencyKeys = Object.keys(data);
+  const generateConvertedAmount = () => {
+    console.log("method called..");
+    setConvertedAmount(fromAmount * data[toCurrency]);
+  };
+
   return (
-    <div>
-      <PasswordGenerator />
+    <div
+      className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
+      style={{
+        backgroundImage: `url('https://www.pexels.com/video/waterfall-in-green-forest-16546157/')`,
+      }}
+    >
+      <div className="w-full">
+        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              generateConvertedAmount();
+            }}
+          >
+            <div className="w-full mb-1">
+              <InputBox
+                label="From"
+                onCurrencyChange={(currency) => setFromCurrency(currency)}
+                amount={fromAmount}
+                selectedCurrency={fromCurrency}
+                currencyOptions={currencyKeys}
+                onAmountChange={(amount) => setFromAmount(amount)}
+              />
+            </div>
+            <div className="relative w-full h-0.5">
+              <button
+                onClick={swapUnits}
+                type="button"
+                className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
+              >
+                swap
+              </button>
+            </div>
+            <div className="w-full mt-1 mb-4">
+              <InputBox
+                label="To"
+                amount={convertedAmount}
+                onAmountChange={(convertedAmount) =>
+                  setConvertedAmount(convertedAmount)
+                }
+                onCurrencyChange={(currency) => setToCurrency(currency)}
+                selectedCurrency={toCurrency}
+                currencyOptions={currencyKeys}
+                amountDisable={false}
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
+            >
+              Convert
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
