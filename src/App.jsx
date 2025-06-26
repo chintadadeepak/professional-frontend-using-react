@@ -1,33 +1,38 @@
-import React, { useState } from "react";
-import { InputBox } from "./components/index";
-import useCurrencyInfo from "./hooks/useCurrencyInfo";
-// import PasswordGenerator from "./projects/password-generator";
+// import React, { useState } from "react";
+// import { InputBox } from "./components/index";
+// import useCurrencyInfo from "./hooks/useCurrencyInfo";
+// // import PasswordGenerator from "./projects/password-generator";
 
 function App() {
-  const [fromAmount, setFromAmount] = useState("");
-  const [convertedAmount, setConvertedAmount] = useState("");
-  const [fromCurrency, setFromCurrency] = useState("usd");
-  const [toCurrency, setToCurrency] = useState("inr");
+  return <></>;
+}
 
-  const swapUnits = () => {
-    let temp = fromCurrency;
-    setFromCurrency(toCurrency);
-    setToCurrency(temp);
-    // temp = fromAmount;
-    // setFromAmount(convertedAmount);
-    // setConvertedAmount(temp);
-    console.log("function called..");
-  };
+export default App;
 
-  const data = useCurrencyInfo(fromCurrency);
-  const currencyKeys = Object.keys(data);
-  const generateConvertedAmount = () => {
-    console.log("method called..");
-    setConvertedAmount(fromAmount * data[toCurrency]);
-  };
+// const [fromAmount, setFromAmount] = useState("");
+// const [convertedAmount, setConvertedAmount] = useState("");
+// const [fromCurrency, setFromCurrency] = useState("usd");
+// const [toCurrency, setToCurrency] = useState("inr");
 
-  return (
-    <div
+// const swapUnits = () => {
+//   let temp = fromCurrency;
+//   setFromCurrency(toCurrency);
+//   setToCurrency(temp);
+//   // temp = fromAmount;
+//   // setFromAmount(convertedAmount);
+//   // setConvertedAmount(temp);
+//   console.log("function called..");
+// };
+
+// const data = useCurrencyInfo(fromCurrency);
+// const currencyKeys = Object.keys(data);
+// const generateConvertedAmount = () => {
+//   console.log("method called..");
+//   setConvertedAmount(fromAmount * data[toCurrency]);
+// };
+
+{
+  /* <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
       style={{
         backgroundImage: `url('https://www.pexels.com/video/waterfall-in-green-forest-16546157/')`,
@@ -82,11 +87,8 @@ function App() {
           </form>
         </div>
       </div>
-    </div>
-  );
+    </div> */
 }
-
-export default App;
 
 // // import { useState } from "react";
 // // import Card from "./components/Card";
